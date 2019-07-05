@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>es6</title>
+<style>
+    img {
+        width:200px;
+        height:200px;
+    }
+</style>
+</head>
+
+<body>
+<script>
+        // Promise加载图片
+        var loadImg = (url) => {
+            return new Promise((resolve, reject) => {
+            // 创建图片
+            var img = new Image()
+             // 加载成功
+            img.onload = () => {
+                resolve(img)
+            }
+           // 图片加载
+            img.onerror = () => {
+                reject(new Error('图片加载失败'))
+            }
+            img.src = url
+        })
+     }
+
+        var imgs = ['http://img4.duitang.com/uploads/item/201411/09/20141109142633_ncKBY.thumb.700_0.jpeg',
+                    'http://img1.imgtn.bdimg.com/it/u=2343874595,2644548018&fm=26&gp=0.jpg',
+                    'http://img5.imgtn.bdimg.com/it/u=2411785438,798115507&fm=26&gp=0.jpg',
+                    'http://img1.imgtn.bdimg.com/it/u=3171509702,234501851&fm=26&gp=0.jpg',
+                    'http://img0.imgtn.bdimg.com/it/u=217966820,3688069696&fm=26&gp=0.jpg',
+                    'http://img3.imgtn.bdimg.com/it/u=2180358788,168891397&fm=26&gp=0.jpg',
+                    'http://img0.imgtn.bdimg.com/it/u=2374449321,1938713875&fm=26&gp=0.jpg',
+                    'http://img1.imgtn.bdimg.com/it/u=2561021307,2074488734&fm=26&gp=0.jpg',
+                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538658203&di=2405d72f77c748c885064770074fed77&imgtype=jpg&er=1&src=http%3A%2F%2Fp1.gexing.com%2Ftouxiang%2F20120801%2F0038%2F50180a1634e49_200x200_3.jpg%3Frecache%3D20131108',
+                    'http://img3.imgtn.bdimg.com/it/u=2423321859,2979330058&fm=27&gp=0.jpg'
+                   ]
+        // 并行加载
+        var loadImgAsync = (imgs)=>{
+            imgs.forEach(async (item)=>{
+                let img = await loadImg(item)
+                document.body.appendChild(img)
+            })
+        }
+
+        loadImgAsync(imgs)
+
+</script>
+</body>
+
+</html>
