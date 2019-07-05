@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <div id="root">
+        <style>
+            #root img{
+                width: 300px;
+            }
+        </style>    
+    </div> 
+</body>
+<script>
+    function Newpromise(url){
+        return new Promise((resolve,reject)=>{
+            var img=new Image()
+            img.src=url
+            img.onload=function(){
+                var ps=document.createElement('ps')  
+                ps.appendChild(img)
+                setTimeout(function(){
+                    resolve(ps)
+                },300)
+            }
+           
+        })
+    }
+
+   var arr=['./image/1.jpg','./image/2.jpg','./image/3.jpg','./image/4.jpg']
+   var dom=document.querySelector('#root')
+    
+    async function Async(arr,dom){
+        for(i=0;i<arr.length;i++){
+             await Newpromise(arr[i]).then(img=>{
+                 dom.appendChild(img)
+             }).catch(err=>{
+                 console.log(err)
+             })
+        }
+    }
+    Async(arr,dom)
+
+
+
+    for(i=0;i<arr.length;i++){
+         Newpromise(arr[i]).then(img=>{
+            dom.appendChild(img)
+        })
+    }
+</script>
+<html>
